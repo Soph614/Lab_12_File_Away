@@ -1,3 +1,4 @@
-Text for test
-This is another line.
-The file should contain thirteen words.
+q
+t
+
+    bye bye

@@ -26,19 +26,16 @@ public class FileInspector {
                 int words = 0;
                 int numberOfCharacters = 0;
                 while (reader.ready()) {
-                    counter = reader.readLine();
+                    counter = reader.readLine().trim();
                     lines.add(counter);
                     lineCount++;
                     System.out.printf("\nLine %4d %-60s ", lineCount, counter);
                     numberOfWords = counter.split(" ");
                     words += numberOfWords.length;
 
-//                    String[] fields;
-//                    for (String l: lines) {
-//                        fields  = l.split(" ");
-//                        String[] wordsForThisLine = l.split(" ");
-//                        words+= wordsForThisLine.length;
-//                    }
+                    for(String word: numberOfWords) {
+                        numberOfCharacters = numberOfCharacters + word.length();
+                    }
                 }
                 reader.close();
                 String[] characters = new String[0];
@@ -47,13 +44,10 @@ public class FileInspector {
                     numberOfCharacters += characters.length;
                 }
 
-
-
                 System.out.println("\nThe file you selected is" + selectedFile);
                 System.out.println("There are " + lineCount + " lines in the file.");
                 System.out.println("There are " + words + " words in the file.");
                 System.out.println("There are " + numberOfCharacters + " characters in the file.");
-
             }
         }
         catch (FileNotFoundException e) {
