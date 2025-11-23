@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.util.ArrayList;
-
 import static java.nio.file.StandardOpenOption.CREATE;
 
 public class FileInspector {
@@ -21,7 +20,6 @@ public class FileInspector {
                 Path file = selectedFile.toPath();
                 InputStream inStream = new BufferedInputStream(Files.newInputStream(file, CREATE));
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inStream));
-
                 int lineCount = 0;
                 int words = 0;
                 int numberOfCharacters = 0;
