@@ -44,28 +44,22 @@ public class TestCode {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
         ArrayList<String> lines = new ArrayList<>();
-        int line = 0;
-        String rec = "";
-        while(reader.ready()) {
-            rec = reader.readLine();
-            lines.add(rec);
-            line++;
-            System.out.printf("\nLine %4d %-60s ", line, rec);
-        }
-        reader.close();
-        System.out.println("\n\nData file read!");
-
         String[] fields;
+        String display1 = "FIRST";
+        String display2 = "LAST";
+        String display3 = "ID_NUM";
+        String display4 = "E-MAIL";
+        String display5 = "YOB";
+        System.out.printf("\n%-25s%-25s%-8s%-20s%6s", display1, display2, display3, display4, display5);
         for(String l : lines) {
             fields = l.split(",");
-
             if(fields.length == FIELDS_LENGTH) {
                 idNumber    = fields[0].trim();
                 firstName   = fields[1].trim();
                 lastName    = fields[2].trim();
                 eMail       = fields[3].trim();
                 yearOfBirth = fields[4].trim();
-                System.out.printf("\n%-25s%-25s%-8s%-6s%6s", firstName, lastName, idNumber, eMail, yearOfBirth);
+                System.out.printf("\n%-25s%-25s%-8s%-20s%6s", idNumber, firstName, lastName, eMail, yearOfBirth);
             }
             else {
                 System.out.println("Found a record that may be corrupt: ");
