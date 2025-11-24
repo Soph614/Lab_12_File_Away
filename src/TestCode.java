@@ -1,10 +1,10 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static java.nio.file.StandardOpenOption.CREATE;
 
 public class TestCode {
     public static void main(String[] args) throws IOException {
@@ -34,16 +34,43 @@ public class TestCode {
             yearOfBirth = SafeInput.getRegExString(pipe, "Enter your year of birth: ", "^\\d{4}$");
             printWriter.write(yearOfBirth);
             printWriter.println();
-            printWriter.close();
             timesGoneThrough++;
             done = SafeInput.getYNConfirm(pipe, "Are you done?");
         } while (!done);
+        printWriter.close();
         Path file = file1.toPath();
-        String [] fields;
 
+        InputStream in = new BufferedInputStream(Files.newInputStream(file, CREATE));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
-        for (int l = 0; l < timesGoneThrough; l++)
-        {
+        ArrayList<String> lines = new ArrayList<>();
+        int line = 0;
+        String rec = "";
+        while(reader.ready()) {
+            rec = reader.readLine();
+            lines.add(rec);
+            line++;
+            System.out.printf("\nLine %4d %-60s ", line, rec);
+        }
+        reader.close();
+        System.out.println("\n\nData file read!");
+
+        String[] fields;
+        for(String l : lines) {
+            fields = l.split(",");
+
+            if(fields.length == FIELDS_LENGTH) {
+                idNumber    = fields[0].trim();
+                firstName   = fields[1].trim();
+                lastName    = fields[2].trim();
+                eMail       = fields[3].trim();
+                yearOfBirth = fields[4].trim();
+                System.out.printf("\n%-25s%-25s%-8s%-6s%6s", firstName, lastName, idNumber, eMail, yearOfBirth);
+            }
+            else {
+                System.out.println("Found a record that may be corrupt: ");
+                System.out.println(1);
+            }
         }
     }
 }
