@@ -5,14 +5,14 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DataSaver {
+public class TestCode {
     public static void main(String[] args) throws IOException {
+        String firstName, lastName, idNumber, eMail, yearOfBirth;
         File file1 = new File("userData.txt");
         FileWriter fileWriter = new FileWriter(file1);
         PrintWriter printWriter = new PrintWriter(fileWriter);
         Scanner pipe = new Scanner(System.in);
         boolean done = false;
-        String firstName, lastName, idNumber, eMail, yearOfBirth;
         ArrayList<String> dataList = new ArrayList<>();
         int timesGoneThrough = 0;
         do {
@@ -35,18 +35,5 @@ public class DataSaver {
             timesGoneThrough++;
             done = SafeInput.getYNConfirm(pipe, "Are you done?");
         } while (!done);
-        String[] fields;
-
-        for (int l = 0; l <timesGoneThrough; l++)
-        {
-                /*
-                fields = data.split(",");
-                idNumber = fields[0].trim();
-                firstName = fields[1].trim();
-                 */
-
-            System.out.printf("\n%-25s%-25s%-8s%-6s", firstName, lastName, idNumber, eMail);
-
-        }
     }
 }
